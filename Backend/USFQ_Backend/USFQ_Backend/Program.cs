@@ -1,7 +1,10 @@
+using USFQ_Backend.Servicios;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddTransient<IRepositorioContacto, RepositorioContacto>();
 
 var app = builder.Build();
 
