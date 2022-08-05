@@ -1,6 +1,36 @@
-﻿@model Contacto
+﻿@model IEnumerable<Contacto>
 @{
     ViewData["Title"] = "Listar Usuarios";
 }
 
 <h1>Listar Usuarios</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Acciones</th>
+            <th>Usuario</th>
+            <th>Telefono</th>
+            <th>Correo</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var contacto in Model)
+        {
+            <tr>
+                <td>
+                    <a class="btn btn-primary">Editar</a>                   
+                </td>
+                <td>
+                    @contacto.Nombre
+                </td>
+                <td>
+                    @contacto.Telefono
+                </td>
+                <td>
+                    @contacto.Correo
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

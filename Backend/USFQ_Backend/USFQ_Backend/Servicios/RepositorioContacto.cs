@@ -6,7 +6,10 @@ namespace USFQ_Backend.Servicios
 {
     public interface IRepositorioContacto
     {
+        Task Actualizar(Contacto contacto);
         Task Crear(Contacto contacto);
+        Task<IEnumerable<Contacto>> Obtener();
+        Task<Contacto> ObtenerPorId(int id);
     }
     public class RepositorioContacto:IRepositorioContacto
     {
@@ -25,6 +28,32 @@ namespace USFQ_Backend.Servicios
                                                 ,contacto);
 
             contacto.Id = id;
-        }        
+        }     
+        
+        public async Task<IEnumerable<Contacto>> Obtener()
+        {
+            using var connection = new SqlConnection(connectionString);
+            return await connection.QueryAsync<Contacto>($@"select id,Nombre,Telefono,Correo from Contacto;");
+
+        }
+
+        public async Task Actualizar(Contacto contacto)
+        {
+            using var connection = new SqlConnection(connectionString);
+            await connection.ExecuteAsync($@"UPDATE Contacto set 
+	            Nombre = @Nombre,
+	            Telefono = @Telefono,
+	            Correo = @Correo
+	            where Id = @ContactoId",contacto);
+        }
+
+        public async Task<Contacto> ObtenerPorId(int id)
+        {
+            using var connection = new SqlConnection(connectionString);
+            return await connection.QueryFirstOrDefaultAsync<Contacto>($@"
+                Select id, Nombre, Telefono, Correo 
+                from Contacto 
+                where id = @IdContacto", new { id });
+        }
     }
 }

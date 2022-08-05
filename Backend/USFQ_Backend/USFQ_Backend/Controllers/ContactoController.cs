@@ -24,12 +24,27 @@ namespace USFQ_Backend.Controllers
         {
             await repositorioContacto.Crear(contacto);
 
-            return View(contacto);
+            return RedirectToAction("Listar");
         }
 
-        public IActionResult Listar()
+        public async Task<IActionResult> Listar()
         {
-            return View();
+            var contactos = await repositorioContacto.Obtener();
+
+            return View(contactos);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Editar(int id)
+        {
+            var contacto = await repositorioContacto.ObtenerPorId(id);
+
+            if(contacto is null)
+            {
+                return RedirectToAction("Listar");
+            }
+
+            return View(contacto);
         }
     }
 }
