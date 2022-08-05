@@ -44,7 +44,7 @@ namespace USFQ_Backend.Servicios
 	            Nombre = @Nombre,
 	            Telefono = @Telefono,
 	            Correo = @Correo
-	            where Id = @ContactoId",contacto);
+	            where Id = @Id",contacto);
         }
 
         public async Task<Contacto> ObtenerPorId(int id)
@@ -53,7 +53,7 @@ namespace USFQ_Backend.Servicios
             return await connection.QueryFirstOrDefaultAsync<Contacto>($@"
                 Select id, Nombre, Telefono, Correo 
                 from Contacto 
-                where id = @IdContacto", new { id });
+                where id = @id", new { id });
         }
     }
 }

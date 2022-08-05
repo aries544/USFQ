@@ -46,5 +46,14 @@ namespace USFQ_Backend.Controllers
 
             return View(contacto);
         }
+
+        [HttpPost]
+        public async Task<ActionResult> Editar(Contacto contacto)
+        {
+            await repositorioContacto.Actualizar(contacto);
+
+            return RedirectToAction("Listar");
+        }
+
     }
 }

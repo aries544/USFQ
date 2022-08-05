@@ -1,0 +1,20 @@
+﻿@model Contacto
+@{
+    ViewData["Title"] = "Editar Usuario";
+}
+
+<h1>Editar Usuario: @Model.Nombre</h1>
+
+<form asp-controller="Contacto" asp-action="Editar">
+    <input type="hidden" asp-for="Id" />
+    <div class="mb-3">
+        <label asp-for="Nombre" class="form-label"></label>
+        <input type="text" asp-for="Nombre" class="form-control" />
+        <label asp-for="Telefono" class="form-label"></label>
+        <input type="text" asp-for="Telefono" class="form-control" />
+        <label asp-for="Correo" class="form-label">Correo</label>
+        <input type="text" asp-for="Correo" class="form-control" />
+    </div>
+    <button type="submit" class="btn btn-primary">Enviar</button>
+    <a class="btn btn-secondary" asp-action="Listar">Cancelar</a>
+</form>
