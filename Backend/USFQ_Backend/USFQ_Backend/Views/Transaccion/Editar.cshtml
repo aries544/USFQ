@@ -1,0 +1,19 @@
+﻿@model Transaccion
+@{
+    ViewData["Title"] = "Editar Transaccion";
+}
+
+<h1>Editar Transacción: @Model.Id</h1>
+
+<form asp-controller="Transaccion" asp-action="Editar">
+    <div class="mb-3">
+        <label asp-for="FechaTransaccion" class="form-label"></label>
+        <input type="date" asp-for="FechaTransaccion" class="form-control" />
+        <label asp-for="Monto" class="form-label"></label>
+        <input asp-for="Monto" class="form-control" />
+        <label asp-for="Nota" class="form-label"></label>
+        <textarea asp-for="Nota" class="form-control"></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Enviar</button>
+    <a class="btn btn-secondary" asp-action="Listar">Cancelar</a>
+</form>

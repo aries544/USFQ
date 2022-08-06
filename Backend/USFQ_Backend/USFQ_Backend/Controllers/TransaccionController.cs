@@ -36,14 +36,14 @@ namespace USFQ_Backend.Controllers
         [HttpGet]
         public async Task<IActionResult> Editar(int id)
         {
-            var contacto = await repositorioTransaccion.ObtenerPorId(id);
+            var transaccion = await repositorioTransaccion.ObtenerPorId(id);
 
-            if (contacto is null)
+            if (transaccion is null)
             {
                 return RedirectToAction("Listar");
             }
 
-            return View(contacto);
+            return View(transaccion);
         }
 
         [HttpPost]

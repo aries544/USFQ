@@ -8,8 +8,8 @@ namespace USFQ_Backend.Servicios
     {
         Task Actualizar(Transaccion transaccion);
         Task Crear(Transaccion transaccion);
-        Task<IEnumerable<Transaccion>> Obtener();
-        Task<Contacto> ObtenerPorId(int id);
+        Task<IEnumerable<Transaccion>> Obtener();        
+        Task<Transaccion> ObtenerPorId(int id);
     }
     public class RepositorioTransaccion:IRepositorioTransaccion
     {
@@ -45,17 +45,17 @@ namespace USFQ_Backend.Servicios
         public async Task Actualizar(Transaccion transaccion)
         {
             using var connection = new SqlConnection(connectionString);
-            await connection.ExecuteAsync($@"UPDATE Transaccion set 
+            await connection.ExecuteAsync($@"UPDATE Transacciones set 
 	                                        FechaTransaccion = @FechaTransaccion,
-	                                        Monto = @Monto	                                        
+	                                        Monto = @Monto,	                                        
 	                                        Nota = @Nota
-	                                        where Id = @TransaccionId", transaccion);
+	                                        where Id = @Id", transaccion);
         }
 
-        public async Task<Contacto> ObtenerPorId(int id)
+        public async Task<Transaccion> ObtenerPorId(int id)
         {
             using var connection = new SqlConnection(connectionString);
-            return await connection.QueryFirstOrDefaultAsync<Contacto>($@"
+            return await connection.QueryFirstOrDefaultAsync<Transaccion>($@"
                 Select Id,FechaTransaccion,Monto,Nota
 	            from Transacciones	
                 where id = @id", new { id });
